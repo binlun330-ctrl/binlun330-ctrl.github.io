@@ -3,11 +3,6 @@ description: 拿出真本事
 lang: zh-CN
 
 markdown: kramdown
-permalink: /posts/:year/:month/:day/:title/
-
-collections:
-  posts:
-    output: true
 
 defaults:
   - scope:
