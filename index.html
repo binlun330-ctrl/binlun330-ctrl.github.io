@@ -1,14 +1,15 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>邦邦的乔布勒斯日记</title>
+  <title>{{ site.title }}</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -40,7 +41,9 @@
       padding: 12px 0;
     }
 
-    .topbar a:hover {
+    .topbar a:hover,
+    .main-nav a:hover,
+    .read-more:hover {
       color: #146bb7;
     }
 
@@ -59,19 +62,15 @@
       color: #777;
     }
 
-    nav.main-nav {
+    .main-nav {
       border-top: 1px solid #eee;
       border-bottom: 1px solid #eee;
     }
 
-    nav.main-nav .container {
+    .main-nav .container {
       display: flex;
       gap: 32px;
       padding: 15px 0;
-    }
-
-    nav.main-nav a:hover {
-      color: #146bb7;
     }
 
     main {
@@ -137,24 +136,24 @@
 
   <div class="topbar">
     <div class="container">
-      <a href="index.html">首页</a>
-      <a href="articles.html">文章列表</a>
-      <a href="about.html">关于</a>
+      <a href="/">首页</a>
+      <a href="/articles.html">文章列表</a>
+      <a href="/about.html">关于</a>
     </div>
   </div>
 
   <header>
     <div class="container">
-      <h1 class="site-title">邦邦的乔布勒斯日记</h1>
-      <div class="site-description">拿出真本事</div>
+      <h1 class="site-title">{{ site.title }}</h1>
+      <div class="site-description">{{ site.description }}</div>
     </div>
   </header>
 
   <nav class="main-nav">
     <div class="container">
-      <a href="index.html">首页</a>
-      <a href="articles.html">文章列表</a>
-      <a href="about.html">关于</a>
+      <a href="/">首页</a>
+      <a href="/articles.html">文章列表</a>
+      <a href="/about.html">关于</a>
     </div>
   </nav>
 
@@ -162,32 +161,34 @@
 
     <div class="posts">
 
-      <article>
-        <div class="meta">随笔 · 2026年8月14日</div>
-        <h2>第一篇文章</h2>
-        <p>
-          这是我的个人博客。从这里开始，我会把值得长期保存的文字放在这里。
-        </p>
-        <a class="read-more" href="#">阅读更多 →</a>
-      </article>
+      {% for post in site.posts %}
 
       <article>
-        <div class="meta">生活 · 2026年8月14日</div>
-        <h2>关于这个网站</h2>
+
+        <div class="meta">
+          {% if post.category %}
+            {{ post.category }} ·
+          {% endif %}
+          {{ post.date | date: "%Y年%m月%d日" }}
+        </div>
+
+        <h2>
+          <a href="{{ post.url }}">
+            {{ post.title }}
+          </a>
+        </h2>
+
         <p>
-          不依赖社交平台，不追求流量，只保存自己真正想留下来的内容。
+          {{ post.excerpt | strip_html | truncate: 100 }}
         </p>
-        <a class="read-more" href="#">阅读更多 →</a>
+
+        <a class="read-more" href="{{ post.url }}">
+          阅读更多 →
+        </a>
+
       </article>
 
-      <article>
-        <div class="meta">杂谈 · 2026年8月14日</div>
-        <h2>一片属于自己的地方</h2>
-        <p>
-          一个简单、安静、可以持续很多年的个人网站。
-        </p>
-        <a class="read-more" href="#">阅读更多 →</a>
-      </article>
+      {% endfor %}
 
     </div>
 
@@ -195,7 +196,7 @@
 
   <footer>
     <div class="container">
-      Copyright © 2026 binlun330-ctrl
+      Copyright © 2026 {{ site.title }}
     </div>
   </footer>
 
