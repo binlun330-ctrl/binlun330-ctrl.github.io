@@ -62,6 +62,12 @@
 5. `git push origin main`
 6. 确认 push 成功。
 
+默认使用快速发布：
+
+- push 成功后立即向用户报告，不等待 GitHub Pages 构建完成。
+- 不主动轮询 Pages 部署状态，也不主动访问线上页面验收。
+- 只有用户明确要求“确认上线”“验证部署”或类似操作时，才等待构建并检查线上页面。
+
 新文章的 commit message 格式：
 
 `Publish: 文章标题`
